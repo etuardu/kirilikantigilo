@@ -1,0 +1,86 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+
+var trans = {
+  "A": "А",
+  "B": "Б",
+  "C": "Ц",
+  "Ĉ": "Ч",
+  "D": "Д",
+  "E": "Е",
+  "F": "Ф",
+  "G": "Г",
+  "Ĝ": "Ѓ",
+  "H": "Х",
+  "Ĥ": "Ћ",
+  "I": "И",
+  "J": "Й",
+  "Ĵ": "Ж",
+  "K": "К",
+  "L": "Л",
+  "M": "М",
+  "N": "Н",
+  "O": "О",
+  "P": "П",
+  "R": "Р",
+  "S": "С",
+  "Ŝ": "Ш",
+  "T": "Т",
+  "U": "У",
+  "Ŭ": "Ў",
+  "V": "В",
+  "Z": "З",
+  "a": "а",
+  "b": "б",
+  "c": "ц",
+  "ĉ": "ч",
+  "d": "д",
+  "e": "е",
+  "f": "ф",
+  "g": "г",
+  "ĝ": "ѓ",
+  "h": "х",
+  "ĥ": "ћ",
+  "i": "и",
+  "j": "й",
+  "ĵ": "ж",
+  "k": "к",
+  "l": "л",
+  "m": "м",
+  "n": "н",
+  "o": "о",
+  "p": "п",
+  "r": "р",
+  "s": "с",
+  "ŝ": "ш",
+  "t": "т",
+  "u": "у",
+  "ŭ": "ў",
+  "v": "в",
+  "z": "з"
+}
+
+$(document).ready(function(){
+  $("#uml").keypress(function(o){
+   
+    var cin = String.fromCharCode(o.which);
+
+    if (!(cin in trans)) return true;
+
+    var cout = trans[cin];
+
+    o.preventDefault();
+    s = this.selectionStart;
+    e = this.selectionEnd;
+    txt = $(this).val().substring(0, s) + cout + $(this).val().substring(e, $(this).val().length);
+    $(this).val( txt );
+    this.selectionStart = s+1;
+    this.selectionEnd = s+1;
+
+    return false;
+  });
+});
+</script>
+<textarea name="uml" id="uml" cols="100" rows="10"></textarea>
