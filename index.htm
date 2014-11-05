@@ -60,19 +60,45 @@ var trans = {
   "ŭ": "ў",
   "v": "в",
   "z": "з"
-}
+};
+
+var xskribo = {
+  "Ц": "Ч",
+  "Г": "Ѓ",
+  "Х": "Ћ",
+  "Й": "Ж",
+  "С": "Ш",
+  "У": "Ў",
+  "ц": "ч",
+  "г": "ѓ",
+  "х": "ћ",
+  "й": "ж",
+  "с": "ш",
+  "у": "ў"
+};
 
 $(document).ready(function(){
   $("#uml").keypress(function(o){
    
+    var s;
+    var cout;
     var cin = String.fromCharCode(o.which);
 
-    if (!(cin in trans)) return true;
+    if (cin in trans) {
 
-    var cout = trans[cin];
+      s = this.selectionStart;
+      cout = trans[cin];
+
+    } else if (cin.toLowerCase() == 'x') {
+
+      s = this.selectionStart - 1;
+      pre_cin = $(this).val().substr(s, 1);
+      cout = xskribo[pre_cin];
+      if (!cout) return true;
+
+    } else return true;
 
     o.preventDefault();
-    s = this.selectionStart;
     e = this.selectionEnd;
     txt = $(this).val().substring(0, s) + cout + $(this).val().substring(e, $(this).val().length);
     $(this).val( txt );
@@ -80,6 +106,7 @@ $(document).ready(function(){
     this.selectionEnd = s+1;
 
     return false;
+
   });
 });
 </script>
